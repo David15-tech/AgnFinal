@@ -33,20 +33,22 @@ public class Agente2 extends Agent{
     
     class comportamiento extends CyclicBehaviour{
         
-        String verf[] = new String[2];
+        //String verf[] = new String[2];
+        
 
         @Override
         public void action() {
             //todo lo que necesite hacer el agente, red neuronal, AG, Bayes, if-else
+            System.out.println("=========GET NAME=======");
             System.out.println(getName());
             ACLMessage msj = blockingReceive();//bloqueado hasta que reciba el mensaje, el metodo arroja un ACLMESSAJE
             
-            String temperatura = msj.getContent();
+            //String temperatura = msj.getContent();
             String idConv = msj.getConversationId();
             
             if(idConv.equalsIgnoreCase("COD0102")){
                 
-                verf[0] = temperatura+"";
+                //verf[0] = temperatura+"";
                 //if (Integer.parseInt(temperatura)>35){
                     try {
                         //System.out.println("temp mayor a 35, abriendo ventiladores");
@@ -59,9 +61,9 @@ public class Agente2 extends Agent{
                         //System.out.print(msj);
                         Cliente cliente = (Cliente) msj.getContentObject();
                         System.out.println(cliente);
-                        Sensores s = (Sensores) msj.getContentObject();
+                        //Sensores s = (Sensores) msj.getContentObject();
                         
-                        System.out.println(s.getRiego()+" "+s.getTemperatura());
+                        //System.out.println(s.getRiego()+" "+s.getTemperatura());
                         
                     } catch (UnreadableException ex) {
                         Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,8 +74,9 @@ public class Agente2 extends Agent{
                         
                         try {
                             
-                           
+                            System.out.println("=======Mensaje recibido de Ag3=====");
                             Object[] pagosVentas = (Object[])msj.getContentObject();
+                            System.out.println("fin de pagosventaas");
                             System.out.println(pagosVentas.length);
                             Pagos pago = (Pagos)pagosVentas[0];
                             Ventas venta = (Ventas)pagosVentas[1];
@@ -88,12 +91,12 @@ public class Agente2 extends Agent{
                     }
                 }
             
-            if(verf[0] != null){
-                if(verf[1] != null){
-                    String  mens = msj.getContent();
-
-                }
-            }
+//            if(verf[0] != null){
+//                if(verf[1] != null){
+//                    String  mens = msj.getContent();
+//
+//                }
+//            }
             
             }
             //System.out.println(msj.getConversationId());

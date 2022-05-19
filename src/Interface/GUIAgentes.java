@@ -28,7 +28,7 @@ public class GUIAgentes extends javax.swing.JFrame {
     
     public GUIAgentes() {
         initComponents();
-        new Contenedor().contenedor(); //y asi se levanta un contenedor de agentes
+         //y asi se levanta un contenedor de agentes
     }
 
     /**

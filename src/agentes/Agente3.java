@@ -48,7 +48,7 @@ public class Agente3 extends Agent{
             System.out.println(getName());
             Object[] pagosVentas = new Object[]{new Pagos(1, 1, 100, "2022-10-10"),new Ventas(1, 1,10, 20221, true, "2022-10-10", "Productos 1 Descrip")};
             
-            Mensajes.enviarS(ACLMessage.INFORM, "UnirInformacion", pagosVentas, "COD0102", getAgent());//se envio el mensaje
+            Mensajes.enviarS(ACLMessage.INFORM, "BuscarDatos", pagosVentas, "COD0302", getAgent());//se envio el mensaje
 
             //terminado = true;//dependiendo lo que se necesite....si no ejecuta esta linea siempre se ejucutara de manera infinita
             //doDelete();//matar al agente, liberas memoria, lo quitas de contenedor ya no se usa(comentar el teminado, pa ejecutar)
@@ -56,7 +56,7 @@ public class Agente3 extends Agent{
             //sensor de Humedad........
             //altas o bajas
             //Mensajes.enviar(ACLMessage.INFORM, "BuscarDatos", "alta", "COD0302", getAgent());//se envio el mensaje
-            //ACLMessage acl = blockingReceive();
+            ACLMessage acl = blockingReceive();
             //System.out.println(acl.getContent());
         }
 
