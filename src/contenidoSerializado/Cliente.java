@@ -14,7 +14,10 @@ public class Cliente implements Serializable{
     private String nombre, apellido, direccion, telefono, correo, ciudad, pais ;
     private int id, idVendedor, zipcode, plazo;
     private double monto;
-
+    
+    public Cliente(){
+        
+    }
     public Cliente(String nombre, String apellido, String direccion, String telefono, String correo, String ciudad, String pais, int id, int idVendedor, int zipcode, int plazo, double monto) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -30,7 +33,7 @@ public class Cliente implements Serializable{
         this.monto = monto;
     }
 
-    
+
     
     public String getNombre() {
         return nombre;

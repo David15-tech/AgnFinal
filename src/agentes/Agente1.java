@@ -4,6 +4,7 @@
  */
 package agentes;
 
+import Interface.GUIAgentes;
 import agnteinitial.Contenedor;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Sensores;
@@ -21,11 +22,13 @@ import java.util.logging.Logger;
  */
 public class Agente1 extends Agent{
 
-    
+    GUIAgentes giu = new GUIAgentes(); 
+    Cliente cli = new Cliente();
     //necesita un comportamiento
     @Override
     protected void setup() {//metodo que se ejecuta siempre primero, todo lo que agamos fuera hay que meterlo a llamar aqui
         //configuracion inicial
+        String id = giu.c1.getNombre();
         addBehaviour(new comportamiento());
     }
     //tenemos los comportamientos, que se pueden controlar del agente sea ciclico secuencial, etc

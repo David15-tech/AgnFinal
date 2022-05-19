@@ -15,7 +15,7 @@ public class AgentesC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        new Contenedor().contenedor(); //y asi se levanta un contenedor de agentes
+        
     }
     
 }
