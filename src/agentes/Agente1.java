@@ -4,6 +4,8 @@
  */
 package agentes;
 
+import jade.gui.GuiAgent;
+import jade.gui.GuiEvent;
 import Interface.GUIAgentes;
 import agnteinitial.Contenedor;
 import contenidoSerializado.Cliente;
@@ -12,24 +14,38 @@ import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
 
 /**
  *
  * @author davpa
  */
-public class Agente1 extends Agent{
+public class Agente1 extends GuiAgent{
 
-    GUIAgentes giu = new GUIAgentes(); 
-    Cliente cli = new Cliente();
+    GUIAgentes gui;
+    Cliente c1 = new Cliente();
+    
     //necesita un comportamiento
     @Override
-    protected void setup() {//metodo que se ejecuta siempre primero, todo lo que agamos fuera hay que meterlo a llamar aqui
+    public void setup() {//metodo que se ejecuta siempre primero, todo lo que agamos fuera hay que meterlo a llamar aqui
         //configuracion inicial
-        String id = giu.c1.getNombre();
-        addBehaviour(new comportamiento());
+        
+        
+        //CyclicBehaviour beha = new comportamiento(this);
+        addBehaviour(new comportamiento(this));
+        gui = new GUIAgentes(this);//Iniciamos nuestro GUI y establecemos un enlace agente-GUI
+        
+        //y mostramos el GUI
+        gui.setVisible(true);
+        
+        System.out.println("\n\n\n\n======FIN SEtup=======\n\n\n");
+
+        
     }
     //tenemos los comportamientos, que se pueden controlar del agente sea ciclico secuencial, etc
     //podemos crear una clase(interna subclase) solo de comportamientos
@@ -43,11 +59,22 @@ public class Agente1 extends Agent{
         System.out.println("Muere");
     }
     
+    @Override
+    public void onGuiEvent(GuiEvent ev){
+        c1 = (Cliente)ev.getParameter(0); //como en un arreglo, se recoge la info insertada en la pos. 0
+        
+        System.out.println("\n\n\n\nEl cliente\n\n\n");
+        System.out.println(c1.toString());
+        System.out.println("-===-=-=-=-=-=-");
+    }
     
-    
-    class comportamiento extends Behaviour{//comportamiento controlado
+    class comportamiento extends CyclicBehaviour{//comportamiento controlado
 
         boolean terminado = false;
+        public comportamiento(GuiAgent ag){
+            super(ag);
+        }
+        
         @Override
         public void action() {
             //todo lo que necesite hacer el agente, red neuronal, AG, Bayes, if-else
@@ -55,17 +82,14 @@ public class Agente1 extends Agent{
             //sensor de temperatura........
             //aqui algun codigo que cada hora pida el valor de la temperatura al
             //Mensajes.enviar(ACLMessage.INFORM, "BuscarDatos", "40", "COD0102", getAgent());//se envio el mensaje
-            Cliente cliente = new Cliente("Henry", "Paz", "Ladron de guevara", "099999", "davpas@gmail.com", "Quito", "Ecuador", 1,2 ,1700 , 15, 5000);
-            Mensajes.enviarS(ACLMessage.INFORM, "UnirInformacion", cliente, "COD0102", getAgent());//se envio el mensaje
-
+            //Cliente cliente = new Cliente("Henry", "Paz", "Ladron de guevara", "099999", "davpas@gmail.com", "Quito", "Ecuador", 1,2 ,1700 , 15, 5000);
+            //Mensajes.enviarS(ACLMessage.INFORM, "UnirInformacion", cliente, "COD0102", getAgent());//se envio el mensaje
+            System.out.println("=======BLoqueo========");
             ACLMessage acl = blockingReceive();
-            System.out.println(acl.getContent());
+            //System.out.println(acl.getContent());
         }
 
-        @Override
-        public boolean done() {
-            return terminado;//con true lo hace una sola vez
-        }
+        
         
     }
     

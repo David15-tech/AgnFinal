@@ -42,9 +42,9 @@ public class Contenedor {
         try {
             //en esta siguiente linea se agrega el agente
             //agentContainer.createNewAgent("Ag4", Agente4.class.getName(), null).start();
-            //agentContainer.createNewAgent("Receptor de info", Agente1.class.getName(), new Object[]{this,1}).start(); //nombre(nick), nombre de la clase donde pertenece
+            agentContainer.createNewAgent("Receptor de info", Agente1.class.getName(), new Object[]{this,1}).start(); //nombre(nick), nombre de la clase donde pertenece
             agentContainer.createNewAgent("BuscarDatos", Agente2.class.getName(), null).start();                                                                                           // con .start() ya se da vida al agente
-            agentContainer.createNewAgent("Receptor", Agente3.class.getName(), null).start();
+            //agentContainer.createNewAgent("Receptor", Agente3.class.getName(), null).start();
              //creamos otro agente
             
             

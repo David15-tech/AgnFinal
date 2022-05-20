@@ -31,7 +31,7 @@
                           <Component id="jPanel3" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -106,13 +106,13 @@
                               <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPais" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtid" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtVendedor" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtZipCode" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtMonto" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPlazo" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtPais" alignment="0" pref="83" max="32767" attributes="0"/>
+                              <Component id="txtid" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtVendedor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtZipCode" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtMonto" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtPlazo" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -120,7 +120,7 @@
                           <Component id="btnIngresar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="48" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
