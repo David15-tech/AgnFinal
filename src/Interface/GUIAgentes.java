@@ -6,10 +6,12 @@ package Interface;
 
 
 import agentes.Agente1;
+import agentes.Agente3;
 import agnteinitial.Contenedor;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Pagos;
 import contenidoSerializado.Ventas;
+import jade.core.event.AgentEvent;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 
@@ -23,20 +25,19 @@ public class GUIAgentes extends javax.swing.JFrame {
      * Creates new form GUIAgentes
      */
     
-    public Ventas[] ventas = new Ventas[100];
-    public Pagos[] pagos = new Pagos[100];
-    int p=0;
-    int v=0;
     private GuiAgent agEnlace; //enlace con el agente
+    private GuiAgent agEnlaceB;
     public final int RECIBO = 0;//decidir si el mensaje se esta recibiendo o enviando
     public Cliente c1;
+    public Pagos pago1;
+    String op = "pagos";
     
     
-    
-    public GUIAgentes(GuiAgent a) {
+    public GUIAgentes(GuiAgent a, GuiAgent b) {
         initComponents();
         
         agEnlace = a;
+        agEnlaceB = b;
          //y asi se levanta un contenedor de agentes
     }
 
@@ -414,12 +415,12 @@ public class GUIAgentes extends javax.swing.JFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
+                                .addGap(21, 21, 21)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(344, 344, 344)
                         .addComponent(bntFin)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,12 +458,13 @@ public class GUIAgentes extends javax.swing.JFrame {
 
     private void btnConfPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfPagoActionPerformed
         // TODO add your handling code here:
-        
-        Pagos pago1 = new Pagos(Integer.parseInt(txtid.getText()),Integer.parseInt(txtidClienteP.getText()) , Double.parseDouble(txtValor.getText()), txtFechaP.getText());
-        
-        pagos[p] = pago1;
-        p++;
-        
+        GuiEvent ev = new GuiEvent(this, RECIBO);
+        pago1 = new Pagos(Integer.parseInt(txtid.getText()),Integer.parseInt(txtidClienteP.getText()) , Double.parseDouble(txtValor.getText()), txtFechaP.getText());
+        op = "pagos";
+        ev.addParameter(op);
+        ev.addParameter(pago1);
+        agEnlace.postGuiEvent(ev);
+        new Agente3().onGuiEvent(ev);
     }//GEN-LAST:event_btnConfPagoActionPerformed
 
     private void btnAgrVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgrVentaActionPerformed
@@ -477,9 +479,7 @@ public class GUIAgentes extends javax.swing.JFrame {
         
         Ventas v1 = new Ventas(Integer.parseInt(txtidVenta.getText()), Integer.parseInt(txtidClienteV.getText()), Integer.parseInt(txtNumFac.getText()), Double.parseDouble(txtValorNeto.getText()),iva , txtFechaV.getText() ,txtDescrip.getText());
         
-        ventas[v] = v1;
-        
-        v++;
+
     }//GEN-LAST:event_btnAgrVentaActionPerformed
 
     private void bntFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFinActionPerformed

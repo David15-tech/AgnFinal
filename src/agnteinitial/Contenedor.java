@@ -4,6 +4,7 @@
  */
 package agnteinitial;
 
+import Interface.GUIAgentes;
 import agentes.Agente1;
 import agentes.Agente2;
 import agentes.Agente3;
@@ -24,6 +25,7 @@ public class Contenedor {
     
     //var global para
     AgentContainer agentContainer;
+    GUIAgentes gui;
     public void contenedor (){
         //rutina en tiempo de ejecucion
         jade.core.Runtime runtime = jade.core.Runtime.instance(); //contenedor en tiempio de ejecucion
@@ -42,12 +44,15 @@ public class Contenedor {
         try {
             //en esta siguiente linea se agrega el agente
             //agentContainer.createNewAgent("Ag4", Agente4.class.getName(), null).start();
-            agentContainer.createNewAgent("Receptor de info", Agente1.class.getName(), new Object[]{this,1}).start(); //nombre(nick), nombre de la clase donde pertenece
-            agentContainer.createNewAgent("BuscarDatos", Agente2.class.getName(), null).start();                                                                                           // con .start() ya se da vida al agente
-            //agentContainer.createNewAgent("Receptor", Agente3.class.getName(), null).start();
+            agentContainer.createNewAgent("Ag2", Agente2.class.getName(), null).start(); 
+            agentContainer.createNewAgent("Ag1", Agente1.class.getName(), new Object[]{this,1}).start(); //nombre(nick), nombre de la clase donde pertenece                                                                                  // con .start() ya se da vida al agente
+            agentContainer.createNewAgent("Ag3", Agente3.class.getName(), null).start();
              //creamos otro agente
             
-            
+            //gui = new GUIAgentes(Agente1.class., Agente3);//Iniciamos nuestro GUI y establecemos un enlace agente-GUI
+        
+            //y mostramos el GUI
+            gui.setVisible(true);
             
             
             //NOTA: de la siguiente manera, estaria mal, requerimos que el receptor nasca primero, mas adelante se vera que hay que bloquearlo hasta que los que los emisores se creen

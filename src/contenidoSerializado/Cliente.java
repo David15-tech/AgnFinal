@@ -12,11 +12,11 @@ import java.io.Serializable;
  */
 public class Cliente implements Serializable{
     private String nombre, apellido, direccion, telefono, correo, ciudad, pais ;
-    private int id, idVendedor, zipcode, plazo;
+    private int idCliente, idVendedor, zipcode, plazo;
     private double monto;
     
     public Cliente(){
-        
+        idCliente=0;
     }
     public Cliente(String nombre, String apellido, String direccion, String telefono, String correo, String ciudad, String pais, int id, int idVendedor, int zipcode, int plazo, double monto) {
         this.nombre = nombre;
@@ -26,7 +26,7 @@ public class Cliente implements Serializable{
         this.correo = correo;
         this.ciudad = ciudad;
         this.pais = pais;
-        this.id = id;
+        this.idCliente = id;
         this.idVendedor = idVendedor;
         this.zipcode = zipcode;
         this.plazo = plazo;
@@ -92,11 +92,11 @@ public class Cliente implements Serializable{
     }
 
     public int getId() {
-        return id;
+        return idCliente;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idCliente = id;
     }
 
     public int getIdVendedor() {
@@ -133,7 +133,7 @@ public class Cliente implements Serializable{
 
     @Override
     public String toString() {
-        return "Cliente:" + "ID:" + id + "Cliente:"+nombre+" "+ apellido;
+        return "Cliente:" + "ID:" + idCliente + "Cliente:"+nombre+" "+ apellido;
     }
     
     

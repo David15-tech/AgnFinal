@@ -18,7 +18,7 @@ public class Ventas implements Serializable{
     private String fecha, descripcionProducto;
     
     public Ventas(){
-        
+        idVentas = 0;
     }
 
     public Ventas(int idVentas, int idCliente, int numeroFactura, double valorNeto, boolean isIVa, String fecha, String descripcion) {

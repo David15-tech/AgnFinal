@@ -10,6 +10,7 @@ import Interface.GUIAgentes;
 import agnteinitial.Contenedor;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Sensores;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
@@ -27,7 +28,7 @@ import java.util.logging.Logger;
  */
 public class Agente1 extends GuiAgent{
 
-    GUIAgentes gui;
+    
     Cliente c1 = new Cliente();
     
     //necesita un comportamiento
@@ -38,10 +39,7 @@ public class Agente1 extends GuiAgent{
         
         //CyclicBehaviour beha = new comportamiento(this);
         addBehaviour(new comportamiento(this));
-        gui = new GUIAgentes(this);//Iniciamos nuestro GUI y establecemos un enlace agente-GUI
         
-        //y mostramos el GUI
-        gui.setVisible(true);
         
         System.out.println("\n\n\n\n======FIN SEtup=======\n\n\n");
 
@@ -83,9 +81,19 @@ public class Agente1 extends GuiAgent{
             //aqui algun codigo que cada hora pida el valor de la temperatura al
             //Mensajes.enviar(ACLMessage.INFORM, "BuscarDatos", "40", "COD0102", getAgent());//se envio el mensaje
             //Cliente cliente = new Cliente("Henry", "Paz", "Ladron de guevara", "099999", "davpas@gmail.com", "Quito", "Ecuador", 1,2 ,1700 , 15, 5000);
-            //Mensajes.enviarS(ACLMessage.INFORM, "UnirInformacion", cliente, "COD0102", getAgent());//se envio el mensaje
-            System.out.println("=======BLoqueo========");
-            ACLMessage acl = blockingReceive();
+            //se envio el mensaje
+            
+            
+            if(c1.getId()!=0){
+                
+                System.out.println(c1.toString());
+                Mensajes.enviarS(ACLMessage.INFORM, "Ag2", c1, "COD0102", getAgent());
+                System.out.println("=======BLoqueo========\n\nCLIENTE\n\n");
+                c1.setId(0);
+                ACLMessage acl = blockingReceive();
+                
+            }
+            
             //System.out.println(acl.getContent());
         }
 

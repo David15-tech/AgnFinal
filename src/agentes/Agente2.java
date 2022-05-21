@@ -70,24 +70,37 @@ public class Agente2 extends Agent{
                     }
                 //}
                 }else {
-                    if(idConv.equalsIgnoreCase("COD0302")){
+                    if(idConv.equalsIgnoreCase("COD0302-p")){
+                        
                         
                         try {
-                            
-                            System.out.println("=======Mensaje recibido de Ag3=====");
-                            Object[] pagosVentas = (Object[])msj.getContentObject();
-                            System.out.println("fin de pagosventaas");
-                            System.out.println(pagosVentas.length);
-                            Pagos pago = (Pagos)pagosVentas[0];
-                            Ventas venta = (Ventas)pagosVentas[1];
-                            System.out.println(pago);
-                            System.out.println(venta);
-                            
-                            
-                            //Mensajes.enviar(ACLMessage.INFORM, "Ag4", "Hola 4", "COD0204", getAgent());
+
+                            Pagos pago = (Pagos)msj.getContentObject();
+                            System.out.println("\n\n\n=====RecibidoPago=====\n\n\n");
+                            System.out.println(pago.toString());
+                            //Mensajes.enviar(ACLMessage.INFORM, "Ag3", "Recibido", "COD0203", getAgent());
+//                        try {
+//                            
+//                            System.out.println("=======Mensaje recibido de Ag3=====");
+//                            Object[] pagosVentas = (Object[])msj.getContentObject();
+//                            System.out.println("fin de pagosventaas");
+//                            System.out.println(pagosVentas.length);
+//                            Pagos pago = (Pagos)pagosVentas[0];
+//                            Ventas venta = (Ventas)pagosVentas[1];
+//                            System.out.println(pago);
+//                            System.out.println(venta);
+//
+//                            
+//                            //Mensajes.enviar(ACLMessage.INFORM, "Ag4", "Hola 4", "COD0204", getAgent());
+//                        } catch (UnreadableException ex) {
+//                            Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
                         } catch (UnreadableException ex) {
                             Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
                         }
+    
+
+
                     }
                 }
             

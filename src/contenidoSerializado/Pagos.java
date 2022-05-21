@@ -21,6 +21,10 @@ public class Pagos implements Serializable{
         this.valor = valor;
         this.fecha = fecha;
     }
+    
+    public Pagos(){
+        idPago=0;
+    }
 
     
     
