@@ -7,6 +7,7 @@ package agentes;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import Interface.GUIAgentes;
+import Interface.GUICliente;
 import agnteinitial.Contenedor;
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Sensores;
@@ -31,6 +32,8 @@ public class Agente1 extends GuiAgent{
     
     Cliente c1 = new Cliente();
     
+    GUICliente cliente;
+    
     //necesita un comportamiento
     @Override
     public void setup() {//metodo que se ejecuta siempre primero, todo lo que agamos fuera hay que meterlo a llamar aqui
@@ -39,8 +42,8 @@ public class Agente1 extends GuiAgent{
         
         //CyclicBehaviour beha = new comportamiento(this);
         addBehaviour(new comportamiento(this));
-        
-        
+        cliente = new GUICliente(this);
+        cliente.setVisible(true);
         System.out.println("\n\n\n\n======FIN SEtup=======\n\n\n");
 
         
@@ -88,6 +91,7 @@ public class Agente1 extends GuiAgent{
                 
                 System.out.println(c1.toString());
                 Mensajes.enviarS(ACLMessage.INFORM, "Ag2", c1, "COD0102", getAgent());
+                Mensajes.enviar(ACLMessage.INFORM, "Ag3", String.valueOf(c1.getId()), "COD0103", getAgent());
                 System.out.println("=======BLoqueo========\n\nCLIENTE\n\n");
                 c1.setId(0);
                 ACLMessage acl = blockingReceive();

@@ -45,14 +45,12 @@ public class Contenedor {
             //en esta siguiente linea se agrega el agente
             //agentContainer.createNewAgent("Ag4", Agente4.class.getName(), null).start();
             agentContainer.createNewAgent("Ag2", Agente2.class.getName(), null).start(); 
-            agentContainer.createNewAgent("Ag1", Agente1.class.getName(), new Object[]{this,1}).start(); //nombre(nick), nombre de la clase donde pertenece                                                                                  // con .start() ya se da vida al agente
             agentContainer.createNewAgent("Ag3", Agente3.class.getName(), null).start();
+            agentContainer.createNewAgent("Ag1", Agente1.class.getName(), new Object[]{this,1}).start(); //nombre(nick), nombre de la clase donde pertenece                                                                                  // con .start() ya se da vida al agente
+            
              //creamos otro agente
             
-            //gui = new GUIAgentes(Agente1.class., Agente3);//Iniciamos nuestro GUI y establecemos un enlace agente-GUI
-        
-            //y mostramos el GUI
-            gui.setVisible(true);
+            
             
             
             //NOTA: de la siguiente manera, estaria mal, requerimos que el receptor nasca primero, mas adelante se vera que hay que bloquearlo hasta que los que los emisores se creen

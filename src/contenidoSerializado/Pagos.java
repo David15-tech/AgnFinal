@@ -62,7 +62,7 @@ public class Pagos implements Serializable{
 
     @Override
     public String toString() {
-        return "IDPago"  + idPago + "IDCliente: "+ idCliente+ "valor:"+ valor;
+        return "IDPago "  + idPago + "IDCliente: "+ idCliente+ "valor:"+ valor;
     }
     
     
