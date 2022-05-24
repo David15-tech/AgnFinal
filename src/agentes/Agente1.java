@@ -94,7 +94,7 @@ public class Agente1 extends GuiAgent{
                 Mensajes.enviar(ACLMessage.INFORM, "Ag3", String.valueOf(c1.getId()), "COD0103", getAgent());
                 System.out.println("=======BLoqueo========\n\nCLIENTE\n\n");
                 c1.setId(0);
-                ACLMessage acl = blockingReceive();
+                blockingReceive();
                 
             }
             

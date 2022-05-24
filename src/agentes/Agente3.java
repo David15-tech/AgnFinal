@@ -7,6 +7,7 @@ package agentes;
 import Interface.GUIAgentes;
 import agnteinitial.Contenedor;
 import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Ventas;
 import jade.core.AID;
 import jade.core.Agent;
@@ -28,6 +29,11 @@ public class Agente3 extends GuiAgent{
     Ventas v1 = new Ventas();
     GUIAgentes gui;
     int op =0;
+    int cond = 0;
+    Ventas[] v = new Ventas[100];    
+    Pagos[] p = new Pagos[100];
+    int conV =0;
+    int conP =0;
     
     //necesita un comportamiento
     @Override
@@ -63,9 +69,18 @@ public class Agente3 extends GuiAgent{
         if(("pagos".equals(op))){
             System.out.println("\n\n\n======ES UN PAGO========\n\n\n");
             p1 = (Pagos) ge.getParameter(1);
-        }else{
-            v1 = (Ventas) ge.getParameter(2);
+            p[conP] = p1;
+            conP++;
         }
+        if(("ventas".equals(op))){
+            v1 = (Ventas) ge.getParameter(1);
+            v[conV] = v1;
+            conV++;
+        }
+        if(("calcule".equals(op))){
+            cond++;
+        }
+        
     }
     
     
@@ -85,33 +100,37 @@ public class Agente3 extends GuiAgent{
             
             //Mensajes.enviarS(ACLMessage.INFORM, "BuscarDatos", pagosVentas, "COD0302", getAgent());//se envio el mensaje
             //
-            
-            if(op==0){
-                ACLMessage msj = blockingReceive();//bloqueado hasta que reciba el mensaje, el metodo arroja un ACLMESSAJE
-                String idCli = msj.getContent();
-                gui.txtidClienteP.setText(idCli);
-                gui.txtidClienteV.setText(idCli);
-                op++;
+            if(cond==0){
+                if(op==0){
+                    ACLMessage msj = blockingReceive();//bloqueado hasta que reciba el mensaje, el metodo arroja un ACLMESSAJE
+                    String idCli = msj.getContent();
+                    gui.txtidClienteP.setText(idCli);
+                    gui.txtidClienteV.setText(idCli);
+                    op++;
+                }else{
+
+//                    if(p1.getIdPago()!=0){
+//
+//
+//                        p[conP] = p1;
+//                        conP++;
+//                        p1.setIdPago(0);
+//
+//
+//                    }
+//                    if(v1.getIdVentas()!=0){
+//
+//                        v[conV] = v1;
+//                        conV++;
+//                        v1.setIdVentas(0);
+//                    }
+                }
             }else{
-                
-                if(p1.getIdPago()!=0){
-                    System.out.println(p1.toString());
-                    Mensajes.enviarS(ACLMessage.INFORM, "Ag2", p1, "COD0302-p", getAgent());
-                    System.out.println("=======BLoqueo========\n\nPAGO\n\n");
-                    p1.setIdPago(0);
-                    ACLMessage acl = blockingReceive();
-
-                }
-                if(v1.getIdVentas()!=0){
-
-                    System.out.println(v1.toString());
-                    Mensajes.enviarS(ACLMessage.INFORM, "BuscarDatos", v1, "COD0302-v", getAgent());
-                    System.out.println("=======BLoqueo========\n\nVENTA\n\n");
-                    p1.setIdPago(0);
-                    ACLMessage acl = blockingReceive();
-
-                }
+                PagosVentas pv = new PagosVentas(p, v);
+                Mensajes.enviarS(ACLMessage.INFORM, "Ag2", pv, "COD0302", getAgent());
+                blockingReceive();
             }
+            
             
             //terminado = true;//dependiendo lo que se necesite....si no ejecuta esta linea siempre se ejucutara de manera infinita
             //doDelete();//matar al agente, liberas memoria, lo quitas de contenedor ya no se usa(comentar el teminado, pa ejecutar)

@@ -29,6 +29,7 @@ public class GUIAgentes extends javax.swing.JFrame {
 
     public final int RECIBO = 0;//decidir si el mensaje se esta recibiendo o enviando
     public Pagos pago1;
+    public Ventas v1;
     String op = "pagos";
     
     
@@ -312,15 +313,23 @@ public class GUIAgentes extends javax.swing.JFrame {
         if(cmbIVA.getSelectedItem().toString().equalsIgnoreCase("NO")){
             iva = false;
         }
-        
-        
-        Ventas v1 = new Ventas(Integer.parseInt(txtidVenta.getText()), Integer.parseInt(txtidClienteV.getText()), Integer.parseInt(txtNumFac.getText()), Double.parseDouble(txtValorNeto.getText()),iva , txtFechaV.getText() ,txtDescrip.getText());
-        
+        v1 = new Ventas(Integer.parseInt(txtidVenta.getText()), Integer.parseInt(txtidClienteV.getText()), Integer.parseInt(txtNumFac.getText()), Double.parseDouble(txtValorNeto.getText()),iva , txtFechaV.getText() ,txtDescrip.getText());
+        GuiEvent ev = new GuiEvent(this, RECIBO);
+        op = "ventas";
+        ev.addParameter(op);
+        ev.addParameter(v1);
+        agEnlace.postGuiEvent(ev);
+        new Agente3().onGuiEvent(ev);
 
     }//GEN-LAST:event_btnAgrVentaActionPerformed
 
     private void bntFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFinActionPerformed
         // TODO add your handling code here:
+        GuiEvent ev = new GuiEvent(this, RECIBO);
+        op = "calcule";
+        ev.addParameter(op);
+        agEnlace.postGuiEvent(ev);
+        new Agente3().onGuiEvent(ev);
     }//GEN-LAST:event_bntFinActionPerformed
 
     /**

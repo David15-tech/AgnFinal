@@ -6,6 +6,7 @@ package agentes;
 
 import contenidoSerializado.Cliente;
 import contenidoSerializado.Pagos;
+import contenidoSerializado.PagosVentas;
 import contenidoSerializado.Sensores;
 import contenidoSerializado.Ventas;
 import jade.core.Agent;
@@ -23,6 +24,10 @@ public class Agente2 extends Agent{
 
     
     //necesita un comportamiento
+    int a = 0;
+    Cliente cliente;
+    PagosVentas pagosVen;
+    
     @Override
     protected void setup() {//metodo que se ejecuta siempre primero, todo lo que agamos fuera hay que meterlo a llamar aqui
         //configuracion inicial
@@ -39,7 +44,6 @@ public class Agente2 extends Agent{
         @Override
         public void action() {
             //todo lo que necesite hacer el agente, red neuronal, AG, Bayes, if-else
-            System.out.println("=========GET NAME=======");
             System.out.println(getName());
             ACLMessage msj = blockingReceive();//bloqueado hasta que reciba el mensaje, el metodo arroja un ACLMESSAJE
             
@@ -48,71 +52,39 @@ public class Agente2 extends Agent{
             
             if(idConv.equalsIgnoreCase("COD0102")){
                 
-                //verf[0] = temperatura+"";
-                //if (Integer.parseInt(temperatura)>35){
                     try {
-                        //System.out.println("temp mayor a 35, abriendo ventiladores");
-                        //necesitamos "actuadores", en este caso algo que aga que el ventilado se prenda....
-                        //........
-                        
-                        
                         //Mensajes.enviar(ACLMessage.INFORM, "Receptor de info", "Prendiendo ventiladores", "COD0201", getAgent());//receptor enviando mensaje
-                        
-                        //System.out.print(msj);
-                        Cliente cliente = (Cliente) msj.getContentObject();
+
+                        cliente = (Cliente) msj.getContentObject();
                         System.out.println(cliente);
-                        //Sensores s = (Sensores) msj.getContentObject();
-                        
-                        //System.out.println(s.getRiego()+" "+s.getTemperatura());
                         
                     } catch (UnreadableException ex) {
                         Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    a++;
                 //}
                 }else {
-                    if(idConv.equalsIgnoreCase("COD0302-p")){
+                    if(idConv.equalsIgnoreCase("COD0302")){
                         
                         
                         try {
-
-                            Pagos pago = (Pagos)msj.getContentObject();
-                            System.out.println("\n\n\n=====RecibidoPago=====\n\n\n");
-                            System.out.println(pago.toString());
-                            //Mensajes.enviar(ACLMessage.INFORM, "Ag3", "Recibido", "COD0203", getAgent());
-//                        try {
-//                            
-//                            System.out.println("=======Mensaje recibido de Ag3=====");
-//                            Object[] pagosVentas = (Object[])msj.getContentObject();
-//                            System.out.println("fin de pagosventaas");
-//                            System.out.println(pagosVentas.length);
-//                            Pagos pago = (Pagos)pagosVentas[0];
-//                            Ventas venta = (Ventas)pagosVentas[1];
-//                            System.out.println(pago);
-//                            System.out.println(venta);
-//
-//                            
-//                            //Mensajes.enviar(ACLMessage.INFORM, "Ag4", "Hola 4", "COD0204", getAgent());
-//                        } catch (UnreadableException ex) {
-//                            Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
+                            pagosVen = (PagosVentas)msj.getContentObject();
                         } catch (UnreadableException ex) {
                             Logger.getLogger(Agente2.class.getName()).log(Level.SEVERE, null, ex);
                         }
-    
-
+                        a++;
 
                     }
                 }
             
-//            if(verf[0] != null){
-//                if(verf[1] != null){
-//                    String  mens = msj.getContent();
-//
-//                }
-//            }
+            if(a == 2){
+                Mensajes.enviarS(ACLMessage.INFORM, "Ag4", new Object[]{pagosVen,cliente}, "COD0204c", getAgent());
+                //Mensajes.enviarS(ACLMessage.INFORM, "Ag4", pagosVen , "COD0204PV", getAgent());
+                a=0;
+                blockingReceive();
+            }
             
             }
-            //System.out.println(msj.getConversationId());
         }
     }
     
